@@ -23,6 +23,7 @@ RUN apt-get install -y --no-install-recommends \
     cmake \ 
     g++ \
     make \
+    curl \
     && rm -rf /var/lib/apt/lists/*
 
 # Install renv

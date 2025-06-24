@@ -4,7 +4,7 @@ library(shinydashboard)
 library(shinyWidgets)
 library(plotly)
 library(dplyr)
-library(magrittr) 
+library(magrittr)
 library(ggplot2)
 library(sf)
 library(DT)
@@ -18,7 +18,11 @@ library(shinycssloaders)
 # Sample Data
 get_sample_data <- function() {
   tibble(
-    LOCATION_NAME = sample(c("Karnataka", "Tamil Nadu", "Maharashtra", "Kerala", "Andhra Pradesh", "Gujarat", "Punjab", "West Bengal", "Odisha", "Bihar"), 20, replace = TRUE),
+    LOCATION_NAME = sample(
+      c("Karnataka", "Tamil Nadu", "Maharashtra", "Kerala", "Andhra Pradesh", 
+        "Gujarat", "Punjab", "West Bengal", "Odisha", "Bihar"), 
+      20, replace = TRUE
+    ),
     CA = runif(20, 20, 100),
     MG = runif(20, 10, 50),
     Sodium = runif(20, 30, 150),
@@ -32,15 +36,16 @@ get_sample_data <- function() {
 # UI
 ui <- dashboardPage(
   title = "Ground Water Assessment Dashboard",
-  skin = "skyblue",
+  skin = "blue",
   
   dashboardHeader(
     title = tags$div(
       style = "display: flex; align-items: center; height: 60px;",
-      tags$span("🌊 Ground Water Assessment", style = "font-size: 18px; font-weight: bold; color: white;")
+      tags$span("🌊 Ground Water Assessment", 
+                style = "font-size: 18px; font-weight: bold; color: white;")
     ),
     titleWidth = 300
-  ), 
+  ),
   
   dashboardSidebar(
     width = 250,
@@ -104,9 +109,9 @@ ui <- dashboardPage(
                     pickerInput("location_filter", label = "Location(s)",
                                 choices = NULL, multiple = TRUE,
                                 options = list(
-                                  actions-box = TRUE,
-                                  live-search = TRUE,
-                                  selected-text-format = "count > 2"
+                                  `actions-box` = TRUE,
+                                  `live-search` = TRUE,
+                                  `selected-text-format` = "count > 2"
                                 ))
                 ),
                 box(width = 8, title = "Piper Diagram", status = "info", solidHeader = TRUE,
@@ -216,5 +221,6 @@ server <- function(input, output, session) {
   })
 }
 
-# Run App
+# Run the Shiny App
 shinyApp(ui, server)
+
